@@ -43,6 +43,7 @@ describe('RESTfull route testing zone', () => {
       name: expect.any(String),
       city: expect.any(String),
       address: expect.any(String),
+
     });
   });
   afterAll(() => {
