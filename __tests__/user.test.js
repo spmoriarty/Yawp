@@ -52,10 +52,17 @@ describe('RESTfull route testing zone', () => {
 
 
   it('should return a list of users if signed in as admin', async () => {
-    const [agent, user] = await login({ email: 'admin' });
+    const [agent] = await login({ email: 'admin' });
     const res = await agent.get('/api/v1/users');
 
-    expect(res.body).toEqual([{ ...user }]);
+    // expect(res.body).toEqual([{ ...user }]);
+    expect(res.body).toEqual(expect.arrayContaining([{
+      id: expect.any(String),
+      firstName: expect.any(String),
+      lastName: expect.any(String),
+      email: expect.any(String),
+      
+    }]));
   });
   // new test here
 
