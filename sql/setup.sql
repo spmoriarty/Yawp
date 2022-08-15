@@ -1,12 +1,20 @@
 -- Use this file to define your SQL tables
 DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS eatery;
 -- The SQL in this file will be executed when you run `npm run setup-db`
 
 CREATE TABLE users (
   id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   first_name TEXT NOT NULL,
   last_name TEXT NOT NULL,
-  email TEXT NOT NULL,
+  email TEXT UNIQUE,
   password_hash TEXT NOT NULL
 );
 
+
+CREATE TABLE eatery (
+    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    name TEXT NOT NULL,
+    city TEXT NOT NULL,
+    address VARCHAR NOT NULL
+);

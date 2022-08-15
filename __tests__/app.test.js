@@ -13,20 +13,20 @@ const mockUser = {
   password: '12345',
 };
 
-const registerAndLogin = async (userProps = {}) => {
-  const password = userProps.password ?? mockUser.password;
+// const registerAndLogin = async (userProps = {}) => {
+//   const password = userProps.password ?? mockUser.password;
 
 
-  const agent = request.agent(app);
+//   const agent = request.agent(app);
 
 
-  const user = await UserService.create({ ...mockUser, ...userProps });
+//   const user = await UserService.create({ ...mockUser, ...userProps });
 
 
-  const { email } = user;
-  await agent.post('/api/v1/users/sessions').send({ email, password });
-  return [agent, user];
-};
+//   const { email } = user;
+//   await agent.post('/api/v1/users/sessions').send({ email, password });
+//   return [agent, user];
+// };
 
 
 
