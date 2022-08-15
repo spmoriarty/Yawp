@@ -50,7 +50,7 @@ describe('RESTfull route testing zone', () => {
     });
   });
 
-  
+
   it.skip('should return a list of users if signed in as admin', async () => {
     const [agent, user] = await login({ email: 'admin' });
     const res = await agent.get('/api/v1/users');
@@ -60,7 +60,7 @@ describe('RESTfull route testing zone', () => {
   // new test here
 
 
-  it.skip('returns the current user', async () => {
+  it('returns the current user', async () => {
     const [agent, user] = await login();
     const me = await agent.get('/api/v1/users/me');
 
