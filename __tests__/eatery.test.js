@@ -10,8 +10,8 @@ describe('RESTfull route testing zone', () => {
   beforeEach(() => {
     return setup(pool);
   });
-  it.skip('get all eateries from table', async () => {
-    const res = await request(app).get('/restaurant');
+  it('get all eateries from table', async () => {
+    const res = await request(app).get('/api/v1/restaurants');
     // eslint-disable-next-line
         const expected = [{
       id: '1',
@@ -27,11 +27,22 @@ describe('RESTfull route testing zone', () => {
     }];
 
     expect(res.status).toBe(200);
-    expect(res.body[0]).toEqual({
+    expect(res.body[2]).toEqual({
       id: '3',
       name: 'Wendys',
       city: 'Oswego',
       address: '789 Distastefull Rd'
+    });
+    
+  });
+  it('get a band from #get/1', async () => {
+    const resp = await request(app).get('/api/v1/restaurants/2');
+    expect(resp.status).toBe(200);
+    expect(resp.body).toEqual({
+      id: '2',
+      name: expect.any(String),
+      city: expect.any(String),
+      address: expect.any(String),
     });
   });
   afterAll(() => {
