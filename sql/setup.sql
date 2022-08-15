@@ -7,7 +7,7 @@ CREATE TABLE users (
   id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   first_name TEXT NOT NULL,
   last_name TEXT NOT NULL,
-  email TEXT UNIQUE,
+  email TEXT NOT NULL,
   password_hash TEXT NOT NULL
 );
 
@@ -18,3 +18,8 @@ CREATE TABLE eatery (
     city TEXT NOT NULL,
     address VARCHAR NOT NULL
 );
+
+INSERT INTO eatery VALUES
+('Taco Bell', 'Portland', '123 Gassy Lane'),
+('McDonalds', 'Gresham', '456 McHappy St'),
+('Wendys', 'Oswego', '789 Distastefull Rd.')
