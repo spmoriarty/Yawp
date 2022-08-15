@@ -19,7 +19,7 @@ CREATE TABLE eatery (
     address VARCHAR NOT NULL
 );
 
-INSERT INTO eatery VALUES
+INSERT INTO eatery (name, city, address) VALUES
 ('Taco Bell', 'Portland', '123 Gassy Lane'),
 ('McDonalds', 'Gresham', '456 McHappy St'),
-('Wendys', 'Oswego', '789 Distastefull Rd.')
+('Wendys', 'Oswego', '789 Distastefull Rd')

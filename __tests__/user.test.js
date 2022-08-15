@@ -13,29 +13,26 @@ const mockUser = {
   password: '12345',
 };
 
-// const registerAndLogin = async (userProps = {}) => {
-//   const password = userProps.password ?? mockUser.password;
+const registerAndLogin = async (userProps = {}) => {
+  const password = userProps.password ?? mockUser.password;
 
 
-//   const agent = request.agent(app);
+  const agent = request.agent(app);
 
 
-//   const user = await UserService.create({ ...mockUser, ...userProps });
+  const user = await UserService.create({ ...mockUser, ...userProps });
 
 
-//   const { email } = user;
-//   await agent.post('/api/v1/users/sessions').send({ email, password });
-//   return [agent, user];
-// };
+  const { email } = user;
+  await agent.post('/api/v1/users/sessions').send({ email, password });
+  return [agent, user];
+};
 
 
 
 describe('RESTfull route testing zone', () => {
   beforeEach(() => {
     return setup(pool);
-  });
-  it('example test - delete me!', () => {
-    expect(1).toEqual(1);
   });
   afterAll(() => {
     pool.end();
@@ -52,7 +49,23 @@ describe('RESTfull route testing zone', () => {
       email,
     });
   });
+  it('should return a list of users if signed in as admin', async () => {
+    const [agent, user] = await registerAndLogin({ email: 'admin' });
+    const res = await agent.get('/api/v1/users');
 
+    expect(res.body).toEqual([{ ...user }]);
+  });
   // new test here
 
+
+  it('returns the current user', async () => {
+    const [agent, user] = await registerAndLogin();
+    const me = await agent.get('/api/v1/users/me');
+
+    expect(me.body).toEqual({
+      ...user,
+      exp: expect.any(Number),
+      iat: expect.any(Number),
+    });
+  });
 });
