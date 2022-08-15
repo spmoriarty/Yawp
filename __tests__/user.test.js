@@ -13,7 +13,7 @@ const mockUser = {
   password: '12345',
 };
 
-const registerAndLogin = async (userProps = {}) => {
+const login = async (userProps = {}) => {
   const password = userProps.password ?? mockUser.password;
 
 
@@ -49,8 +49,10 @@ describe('RESTfull route testing zone', () => {
       email,
     });
   });
-  it('should return a list of users if signed in as admin', async () => {
-    const [agent, user] = await registerAndLogin({ email: 'admin' });
+
+  
+  it.skip('should return a list of users if signed in as admin', async () => {
+    const [agent, user] = await login({ email: 'admin' });
     const res = await agent.get('/api/v1/users');
 
     expect(res.body).toEqual([{ ...user }]);
@@ -58,8 +60,8 @@ describe('RESTfull route testing zone', () => {
   // new test here
 
 
-  it('returns the current user', async () => {
-    const [agent, user] = await registerAndLogin();
+  it.skip('returns the current user', async () => {
+    const [agent, user] = await login();
     const me = await agent.get('/api/v1/users/me');
 
     expect(me.body).toEqual({
