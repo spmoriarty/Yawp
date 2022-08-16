@@ -20,7 +20,7 @@ const login = async (userProps = {}) => {
   const agent = request.agent(app);
 
 
-  const user = await UserService.create({ ...mockUser, ...userProps });
+  const [user] = await UserService.create({ ...mockUser, ...userProps });
 
 
   const { email } = user;
@@ -40,13 +40,11 @@ describe('RESTfull route testing zone', () => {
 
   it('creates a new user', async () => {
     const res = await request(app).post('/api/v1/users').send(mockUser);
-    const { firstName, lastName, email } = mockUser;
+    
 
     expect(res.body).toEqual({
-      id: expect.any(String),
-      firstName,
-      lastName,
-      email,
+
+      message: 'Signed in successfully!',
     });
   });
 

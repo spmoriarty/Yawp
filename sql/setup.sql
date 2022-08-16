@@ -34,7 +34,8 @@ CREATE table reviews (
 INSERT INTO eatery (name, city, address) VALUES
 ('Taco Bell', 'Portland', '123 Gassy Lane'),
 ('McDonalds', 'Gresham', '456 McHappy St'),
-('Wendys', 'Oswego', '789 Distastefull Rd');
+('Wendys', 'Oswego', '789 Distastefull Rd'),
+('Arbys', 'Salem', '123 Sucks ln');
 
 INSERT INTO users (first_name, last_name, email, password_hash) VALUES
 ('Paul', 'Porter', 'paulPorter@porter.com', '12345');

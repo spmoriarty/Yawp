@@ -2,9 +2,29 @@ const pool = require('../lib/utils/pool');
 const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
+const UserService = require('../lib/services/UserService');
+
+const mockUser = {
+  firstName: 'Charlie',
+  lastName: 'Brown',
+  email: 'peanuts@gang.com',
+  password: '12345',
+};
+
+const login = async (userProps = {}) => {
+  const password = userProps.password ?? mockUser.password;
 
 
+  const agent = request.agent(app);
 
+
+  const [user] = await UserService.create({ ...mockUser, ...userProps });
+
+
+  const { email } = user;
+  await agent.post('/api/v1/users/sessions').send({ email, password });
+  return [agent, user];
+};
 
 describe('RESTfull route testing zone', () => {
   beforeEach(() => {
@@ -37,15 +57,19 @@ describe('RESTfull route testing zone', () => {
   });
 
   it('POST should insert a new review into reviews table', async () => {
+    const [agent, user] = await login();
+    
     const newReview = {
   
       review: 'this is awesome',
     };
-    const resp = await request(app).post('/api/v1/restaurants/1').send(newReview);
+    const resp = await agent.post('/api/v1/restaurants/1/reviews').send(newReview);
+    
     expect(resp.body).toEqual({
       id: expect.any(String),
       ...newReview,
-      review: expect(resp.body.review).toBe('this is awesome')
+      user_id: user.id,
+      eatery_id: '1',
     });
   });
 
