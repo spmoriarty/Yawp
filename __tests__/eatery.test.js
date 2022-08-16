@@ -12,21 +12,6 @@ describe('RESTfull route testing zone', () => {
   });
   it('get all eateries from table', async () => {
     const res = await request(app).get('/api/v1/restaurants');
-    // eslint-disable-next-line
-        const expected = [{
-      id: '1',
-      name: 'Taco Bell',
-      city: 'Portland',
-      address: '123 Gassy Lane',
-      review: expect.any(Array)
-    },
-    {
-      id: '2',
-      name: 'McDonalds',
-      city: 'Gresham',
-      address: '456 McHappy St',
-      review: expect.any(Array)
-    }];
 
     expect(res.status).toBe(200);
     expect(res.body[2]).toEqual({
@@ -50,6 +35,21 @@ describe('RESTfull route testing zone', () => {
 
     });
   });
+
+  it('POST should insert a new review into reviews table', async () => {
+    const newReview = {
+  
+      review: 'this is awesome',
+    };
+    const resp = await request(app).post('/api/v1/restaurants/1').send(newReview);
+    expect(resp.body).toEqual({
+      id: expect.any(String),
+      ...newReview,
+      review: expect(resp.body.review).toBe('this is awesome')
+    });
+  });
+
+
   afterAll(() => {
     pool.end();
   });
