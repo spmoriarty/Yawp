@@ -17,13 +17,15 @@ describe('RESTfull route testing zone', () => {
       id: '1',
       name: 'Taco Bell',
       city: 'Portland',
-      address: '123 Gassy Lane'
+      address: '123 Gassy Lane',
+      review: expect.any(Array)
     },
     {
       id: '2',
       name: 'McDonalds',
       city: 'Gresham',
-      address: '456 McHappy St'
+      address: '456 McHappy St',
+      review: expect.any(Array)
     }];
 
     expect(res.status).toBe(200);
@@ -31,19 +33,20 @@ describe('RESTfull route testing zone', () => {
       id: '3',
       name: 'Wendys',
       city: 'Oswego',
-      address: '789 Distastefull Rd'
+      address: '789 Distastefull Rd',
+      review: expect.any(Array)
     });
     
   });
   it('get a Restaurant from #get/:id', async () => {
-    const resp = await request(app).get('/api/v1/restaurants/2');
+    const resp = await request(app).get('/api/v1/restaurants/1');
     expect(resp.status).toBe(200);
     expect(resp.body).toEqual({
-      id: '2',
+      id: '1',
       name: expect.any(String),
       city: expect.any(String),
       address: expect.any(String),
-      reviews: expect.any(Array)
+      review: expect.any(Array)
 
     });
   });
