@@ -35,7 +35,7 @@ describe('RESTfull route testing zone', () => {
     });
     
   });
-  it('get a band from #get/1', async () => {
+  it('get a Restaurant from #get/:id', async () => {
     const resp = await request(app).get('/api/v1/restaurants/2');
     expect(resp.status).toBe(200);
     expect(resp.body).toEqual({
@@ -43,6 +43,7 @@ describe('RESTfull route testing zone', () => {
       name: expect.any(String),
       city: expect.any(String),
       address: expect.any(String),
+      reviews: expect.any(Array)
 
     });
   });
